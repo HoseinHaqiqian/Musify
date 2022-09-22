@@ -1,0 +1,10 @@
+package mx.yts.data.entities
+
+import android.net.Uri
+
+data class MusicEntity(
+    var id: Int,
+    var name :String,
+    var artist : String,
+    var artUri : Uri
+)
