@@ -1,16 +1,13 @@
-package mx.yts.common
+package mx.yts.common.utils
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
-import com.google.accompanist.permissions.PermissionRequired
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.core.content.ContextCompat
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 @SuppressLint("PermissionLaunchedDuringComposition")
@@ -25,7 +22,7 @@ fun RequestPermission(permission: String, job: () -> Unit) {
             launchPermissionRequest = true
         }
         permissionState.hasPermission -> {
-            Log.d("Permission", "Permission Granted")
+            Log.d("Permission", "Permission Granted 1")
             job.invoke()
         }
         !permissionState.hasPermission -> {
@@ -38,20 +35,28 @@ fun RequestPermission(permission: String, job: () -> Unit) {
             launchPermissionRequest = false
         }
     }
-}@SuppressLint("PermissionLaunchedDuringComposition")
+}
+
+var permissionGranted = false
+
+@SuppressLint("PermissionLaunchedDuringComposition")
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun RequestPermissions(vararg  permission: String, job: () -> Unit) {
+fun RequestPermissions(vararg permission: String, job: () -> Unit) {
     val permissionState = rememberMultiplePermissionsState(permission.toList())
     var launchPermissionRequest by rememberSaveable { mutableStateOf(false) }
+
     when {
         !permissionState.permissionRequested -> {
             Log.d("Permission", "Permission Requested")
             launchPermissionRequest = true
         }
         permissionState.allPermissionsGranted -> {
-            Log.d("Permission", "Permission Granted")
+            if (!launchPermissionRequest) return
             job.invoke()
+            Log.d("Permission", "Permission Granted 2")
+            permissionGranted = true
+            return
         }
         !permissionState.allPermissionsGranted -> {
             Log.d("Permission", "Permission Not Granted")
