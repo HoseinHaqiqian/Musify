@@ -1,4 +1,4 @@
-package mx.yts.common
+package mx.yts.common.utils
 
 sealed class Result<out T>() {
 
