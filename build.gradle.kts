@@ -5,12 +5,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven(Mavens.sharedElement)
     }
     dependencies {
         classpath(Plugins.androidTools)
         classpath(Plugins.kotlin)
         classpath(Plugins.dagger)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     }
 }
 

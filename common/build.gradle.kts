@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -44,5 +45,9 @@ dependencies {
     implementation(Dependencies.ktx)
     implementation(Dependencies.composeMaterial)
     implementation(Dependencies.activityCompose)
+    implementation(Dependencies.navigationCompose)
+    implementation("androidx.core:core-ktx:+")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.0.0")
+
 
 }

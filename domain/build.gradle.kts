@@ -40,6 +40,8 @@ dependencies {
     implementation(project(":data"))
     implementation(Dependencies.kotlinCoroutine)
     implementation(Dependencies.dagger)
+    implementation("androidx.core:core-ktx:+")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.0.0")
     kapt(Dependencies.daggerCompiler)
 
 }

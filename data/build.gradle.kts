@@ -39,6 +39,8 @@ android {
 
 dependencies {
     implementation(Dependencies.dagger)
+    implementation("androidx.core:core-ktx:+")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.0.0")
     kapt(Dependencies.daggerCompiler)
     implementation(Dependencies.kotlinCoroutine)
 

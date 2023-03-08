@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -53,6 +54,8 @@ dependencies {
     implementation(Dependencies.compose)
     implementation(Dependencies.composeCompiler)
     implementation(Dependencies.dagger)
+    implementation("androidx.core:core-ktx:+")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.0.0")
     kapt(Dependencies.daggerCompiler)
     implementation(Dependencies.kotlinCoroutine)
 
@@ -64,5 +67,7 @@ dependencies {
     implementation(Dependencies.composeMaterialIconsExtended)
     implementation(Dependencies.activityCompose)
     implementation(Dependencies.glide)
+    implementation(Dependencies.sharedElement)
+
 
 }
