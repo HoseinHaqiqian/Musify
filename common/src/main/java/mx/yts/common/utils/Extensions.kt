@@ -45,7 +45,7 @@ var permissionGranted = false
 fun RequestPermissions(vararg permission: String, job: () -> Unit) {
     val permissionState = rememberMultiplePermissionsState(permission.toList())
     var launchPermissionRequest by rememberSaveable { mutableStateOf(false) }
-
+    if (permissionGranted) return
     when {
         !permissionState.permissionRequested -> {
             Log.d("Permission", "Permission Requested")
