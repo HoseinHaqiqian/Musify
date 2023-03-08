@@ -4,4 +4,5 @@ import mx.yts.data.entities.MusicEntity
 
 interface  MusicRepository  {
     fun getAllMusics() : List<MusicEntity>
+    fun getMusic(id:String) : MusicEntity
 }

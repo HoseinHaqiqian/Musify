@@ -9,4 +9,8 @@ class MusicRepositoryImpl @Inject constructor(var musicProvider: MusicProvider) 
     override fun getAllMusics(): List<MusicEntity> {
         return musicProvider.getAllMusics()
     }
+
+    override fun getMusic(id: String): MusicEntity {
+        return musicProvider.getMusic(id)
+    }
 }
