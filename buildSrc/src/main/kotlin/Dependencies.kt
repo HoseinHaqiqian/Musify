@@ -1,5 +1,5 @@
 object Dependencies {
-    val composeCompiler by lazy{"androidx.compose.compiler:compiler:${Versions.composeCompiler}"}
+    val composeCompiler by lazy { "androidx.compose.compiler:compiler:${Versions.composeCompiler}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.appCompat}" }
     val dagger by lazy { "com.google.dagger:hilt-android:${Versions.dagger}" }
@@ -21,6 +21,8 @@ object Dependencies {
     val navigationCompose by lazy { "androidx.navigation:navigation-compose:${Versions.navigation}" }
     val kotlinCoroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}" }
     val multiDex by lazy { "androidx.multidex:multidex:${Versions.multiDex}" }
-    val glide by lazy { "com.github.skydoves:landscapist-glide:${Versions.glide}"}
+    val glide by lazy { "com.github.skydoves:landscapist-glide:${Versions.glide}" }
+    val coil by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
+    val sharedElement by lazy { "com.mxalbert.sharedelements:shared-elements:${Versions.sharedElement}" }
 
 }
