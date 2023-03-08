@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Musify</string>
+      <string name="title_player">player</string>
 </resources>
