@@ -7,9 +7,6 @@ object Dependencies {
     val daggerHiltCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.daggerNavCompose}" }
 
     val ktx by lazy { "androidx.core:core-ktx:${Versions.ktx}" }
-    val ktorCore by lazy { "io.ktor:ktor-client-core:${Versions.ktor}" }
-    val ktorAndroid by lazy { "io.ktor:ktor-client-core:${Versions.ktor}" }
-    val ktorOkhttp by lazy { "io.ktor:ktor-client-okhttp:${Versions.ktor}" }
     val compose by lazy { "androidx.compose.ui:ui:${Versions.compose}" }
     val composeTooling by lazy { "androidx.compose.ui:ui-tooling:${Versions.compose}" }
     val composeFoundation by lazy { "androidx.compose.foundation:foundation:${Versions.compose}" }
