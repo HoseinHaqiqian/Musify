@@ -25,6 +25,7 @@ import hosein.haqiqian.player.viewmodels.PlayerViewModel
 import mx.yts.common.utils.Result
 import mx.yts.common.utils.loadImage
 import mx.yts.domain.model.MusicModel
+import mx.yts.domain.utils.DisplayUtils
 
 class PlayerParams {
     companion object {
@@ -157,8 +158,20 @@ fun seekBar(audioInfoViewModel: PlayerViewModel) {
                 audioInfoViewModel.seekTo(sliderValue * 1000)
             })
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(text = "${if (minutes < 10) "0$minutes" else minutes}:${if (seconds < 10) "0$seconds" else seconds}")
-            Text(text = "${if (duration?.minutes!! < 10) "0${duration.minutes}" else duration.minutes}:${if (duration.seconds!! < 10) "0${duration.seconds}" else duration.seconds}")
+            Text(
+                text = "${DisplayUtils.twoDigitFormat(minutes)}:${
+                    DisplayUtils.twoDigitFormat(
+                        seconds
+                    )
+                }"
+            )
+            Text(
+                text = "${DisplayUtils.twoDigitFormat(duration!!.minutes)}:${
+                    DisplayUtils.twoDigitFormat(
+                        duration.seconds
+                    )
+                }"
+            )
         }
     }
 }
