@@ -4,10 +4,14 @@ import android.Manifest
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.GridView
+import androidx.compose.material.icons.rounded.ViewList
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
@@ -38,8 +42,7 @@ class MusicsParams {
 @Composable
 fun Musics(viewModel: MusicListViewModel, openPlayer: (id: String) -> Unit) {
     RequestPermissions(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
     ) {
         viewModel.getMusics()
     }
@@ -61,11 +64,43 @@ fun Musics(viewModel: MusicListViewModel, openPlayer: (id: String) -> Unit) {
 @Composable
 fun MusicList(musicUiState: StateFlow<Result<List<MusicModel>>>, openPlayer: (id: String) -> Unit) {
     val godState by remember { mutableStateOf(musicUiState) }
-    Column {
-        when (val state = godState.collectAsState().value) {
-            is Result.Failure -> NoMusicView()
-            is Result.Loading -> Text("Loading...")
-            is Result.Success -> ListOfMusics(state.data, openPlayer)
+    var showAsList by remember { mutableStateOf(true) }
+    Box(Modifier.fillMaxSize()) {
+        Column {
+            when (val state = godState.collectAsState().value) {
+                is Result.Failure -> NoMusicView()
+                is Result.Loading -> Text("Loading...")
+                is Result.Success -> {
+                    if (showAsList)
+                        MusicsListView(state.data, openPlayer)
+                    else
+                        MusicsGridView(state.data, openPlayer)
+                }
+            }
+        }
+        FloatingActionButton(
+            onClick = { showAsList = !showAsList },
+            Modifier
+                .align(Alignment.BottomEnd)
+                .padding(10.dp)
+        ) {
+            Icon(
+                imageVector = if (showAsList) Icons.Rounded.ViewList else Icons.Rounded.GridView,
+                contentDescription = null
+            )
+        }
+    }
+}
+
+@Composable
+fun MusicsListView(data: List<MusicModel>, openPlayer: (id: String) -> Unit) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+
+    ) {
+        items(data.size) {
+            HorizontalMusicItem(data[it], openPlayer)
+            Divider()
         }
     }
 }
@@ -85,10 +120,11 @@ fun NoMusicView() {
 }
 
 @Composable
-fun ListOfMusics(data: List<MusicModel>, openPlayer: (id: String) -> Unit) {
+fun MusicsGridView(data: List<MusicModel>, openPlayer: (id: String) -> Unit) {
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2), contentPadding = PaddingValues(8.dp, 4.dp),
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(8.dp, 4.dp),
         verticalArrangement = Arrangement.spacedBy(5.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
